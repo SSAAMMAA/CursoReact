@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import LocationList from './components/LocationList';
 import './App.css';
-
-function App() {
-  return (
+const ciudades = [
+  'Buenos Aires,ar',
+  'Washington,us',
+  'Bogota,col',
+  'Madrid,es',
+  'Lima,Peru'
+];
+class App extends Component {
+  handleSelectedLocation = city =>{
+    console.log ("handleSelectedLocation");
+  }
+  render(){ 
+    return(
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <LocationList cities={ciudades}
+      onSelectedLocation={this.handleSelectedLocation}/>
     </div>
-  );
+    );
+  }
 }
 
 export default App;
