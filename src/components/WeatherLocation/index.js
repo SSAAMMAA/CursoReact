@@ -43,7 +43,7 @@ class WeatherLocation extends Component{ // al extender de component tenemos mas
                 <Location city={city}></Location>
                 {data ? 
                     <WeatherData data={data}></WeatherData> :
-                    <CircularProgress size={100}/>
+                    <CircularProgress size={60} thickness={7}/>
                 }
             </div>
         );
