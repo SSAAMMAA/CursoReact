@@ -13,7 +13,16 @@ class ForecastExtended extends Component{
     }
 
     componentDidMount(){
-        const {city} = this.props;
+        this.updateCity(this.props.city);
+    }
+    componentWillReceiveProps(nextProps) { //Se ejecuta cada vez que hay alguna actualizacion de las propiedades
+        if (nextProps.city !== this.props.city){ //Si la proxima propiedad city es diferente a la que ya esta seteada
+            this.state = { forecastData: null } //volviendo el forecastData a nulo se pone el valor de carga
+            this.updateCity(nextProps.city); // ejecuta el update con la nueva city
+        }
+    }
+    
+    updateCity = city => {
         fetch(`${url_base_forecast}?q=${city}&appid=${api_key}`).then(
             resolve =>(resolve.json())
         ).then(
@@ -26,6 +35,7 @@ class ForecastExtended extends Component{
         .catch((error)=>(console.log(error)));
 
     }
+
     renderForecastItemDays(forecastData){
         return forecastData.map( forecast => (
         <ForecastItem 
