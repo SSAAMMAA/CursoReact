@@ -17,7 +17,7 @@ class ForecastExtended extends Component{
     }
     componentWillReceiveProps(nextProps) { //Se ejecuta cada vez que hay alguna actualizacion de las propiedades
         if (nextProps.city !== this.props.city){ //Si la proxima propiedad city es diferente a la que ya esta seteada
-            this.state = { forecastData: null } //volviendo el forecastData a nulo se pone el valor de carga
+            this.setState ({forecastData: null} ) //volviendo el forecastData a nulo se pone el valor de carga
             this.updateCity(nextProps.city); // ejecuta el update con la nueva city
         }
     }
