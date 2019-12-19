@@ -12,7 +12,7 @@ const ciudades = [
   'Washington,us',
   'Bogota,col',
   'Madrid,es',
-  'Lima,Peru'
+  'Tandil,ar'
 ];
 class App extends Component {
 
@@ -48,9 +48,9 @@ class App extends Component {
           <Col xs={12} md={6}>
             <Paper zdepth={4}>
               <div className="details">
-                {city === null ? 
-                  <h1>No se seleccionó ciudad</h1> :
-                  <ForecastExtended city={city}></ForecastExtended>
+                {city ? 
+                  <ForecastExtended city={city}></ForecastExtended> :
+                  null
                 }
               </div>
             </Paper>
