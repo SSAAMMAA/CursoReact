@@ -28,7 +28,6 @@ class ForecastExtended extends Component{
         ).then(
             forecast_data => {
                 const forecastData = transformForecast(forecast_data);
-                console.log(forecastData)
                 this.setState({forecastData});
             }
         )
@@ -59,9 +58,6 @@ class ForecastExtended extends Component{
                         this.renderForecastItemDays(forecastData) :
                         this.renderProgress()}
                 </div>
-                {/* <div>
-                    {this.renderForecastItemDays()}
-                </div> */}
             </div>
         )
     }

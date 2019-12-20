@@ -4,8 +4,10 @@ import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import { Grid, Row, Col} from 'react-flexbox-grid';
+import {connect} from 'react-redux';
 import LocationList from './components/LocationList';
 import ForecastExtended from './components/ForecastExtended';
+import {setCity} from './actions'
 import './App.css';
 const ciudades = [
   'Buenos Aires,ar',
@@ -14,6 +16,7 @@ const ciudades = [
   'Madrid,es',
   'Tandil,ar'
 ];
+
 class App extends Component {
 
   constructor(){
@@ -23,8 +26,9 @@ class App extends Component {
     }
   }
   handleSelectedLocation = city =>{
-    console.log (`handleSelectedLocation con ${city}`);
     this.setState({city});
+    console.log (`handleSelectedLocation con ${city}`);
+    this.props.setCity(city);
   }
   render(){ 
     const {city} = this.state;
@@ -63,4 +67,11 @@ class App extends Component {
   }
 }
 
-export default App;
+
+const mapDispatchToPropsActions = (dispatch) => ({   //este objeto tendra las funciones que vamos a invocar
+   setCity: value => dispatch(setCity(value))
+
+});
+const AppConected = connect(null, mapDispatchToPropsActions)(App)      //Funcion que retorna otra funcion quye espera que le pasemos por parametro el componente
+//Componente App tendra la habilidad de conectarse con el store
+export default AppConected;
