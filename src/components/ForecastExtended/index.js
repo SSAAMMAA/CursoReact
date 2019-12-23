@@ -11,7 +11,7 @@ class ForecastExtended extends Component{
         super();
         this.state = { forecastData: null }
     }
-
+    
     componentDidMount(){
         this.updateCity(this.props.city);
     }
@@ -23,8 +23,10 @@ class ForecastExtended extends Component{
     }
     
     updateCity = city => {
-        fetch(`${url_base_forecast}?q=${city}&appid=${api_key}`).then(
-            resolve =>(resolve.json())
+        const url_forecast = `${url_base_forecast}?q=${city}&appid=${api_key}`;
+
+        fetch(url_forecast).then(
+            data =>(data.json())
         ).then(
             forecast_data => {
                 const forecastData = transformForecast(forecast_data);
@@ -32,7 +34,6 @@ class ForecastExtended extends Component{
             }
         )
         .catch((error)=>(console.log(error)));
-
     }
 
     renderForecastItemDays(forecastData){
@@ -44,19 +45,22 @@ class ForecastExtended extends Component{
             key={`${forecast.weekDay}${forecast.hour}`}>
             </ForecastItem>));
     }
-    renderProgress = () =>{
-        return <h3>Cargando pronostico extendido...</h3>;
-    }
+    renderProgress = () =>(
+        this.props.city &&
+            <h3>Cargando pronostico extendido...</h3>
+            )
     render(){
         const {city} = this.props;
         const {forecastData} = this.state;
         return (
             <div>
-                <div>
+                <div className= "details">
                     <h2 className='forecast-title'>{`Pronóstico Extendido para ${city}`}</h2>
-                    {forecastData ?
+                    {
+                    forecastData ?
                         this.renderForecastItemDays(forecastData) :
-                        this.renderProgress()}
+                        this.renderProgress()
+                    }
                 </div>
             </div>
         )
